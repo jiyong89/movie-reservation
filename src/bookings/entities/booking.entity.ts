@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class User {
+export class Booking {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  username: string;
+  userId: number;
 
   @Column()
-  password: string;
+  performanceId: number;
 }

@@ -4,10 +4,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { DEFAULT_CUSTOMER_POINT } from 'src/constants/poin.constant';
+import { ConfigService } from '@nestjs/config';
+import bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
   constructor(
+    private readonly configService: ConfigService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
   async signUp({
@@ -28,9 +31,12 @@ export class AuthService {
       throw new BadRequestException('이미 가입된 이메일 입니다.');
     }
 
+    const hashRound = this.configService.get<number>('PASSWORD_HASH_ROUNDS');
+    const hashedPassword = bcrypt.hashSync(password, hashRound);
+
     const user = await this.userRepository.save({
       email,
-      password,
+      password: hashedPassword,
       nickname,
       points: DEFAULT_CUSTOMER_POINT,
     });

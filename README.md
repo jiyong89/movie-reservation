@@ -71,3 +71,64 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## ERD
+
+<iframe width="100%" height="500px" style="box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); border-radius:15px;" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Embedded DrawSQL IFrame" frameborder="0" src="https://drawsql.app/teams/jiyongsongteam/diagrams/movie-reservation/embed"></iframe>
+
+# Common ground / API 명세서
+
+Request Header
+인증 필요 API
+
+- Authorization : Bearer<JWT>
+
+```bash
+Authorization : Bearer eyJhbGci0IJIuzI1NiIsInr...
+```
+
+Body에 Data를 넘기는 경우
+
+- Content-Type : application/json
+
+Response Body
+
+성공 시
+
+- statusCode : HTTP Status Code
+- message : API 호출 성공 메세지
+- data : API 호출 결과 데이터
+
+```bash
+{
+  "statusCode" : 200,
+  "message" : "API 호출에 성공했습니다.",
+  "data" : {
+    "key" : "value"
+  }
+}
+```
+
+실패 시
+
+- statusCode : HTTP Status Code
+- message : API 호출 성공 메세지
+- error : 에러 종류
+
+```bash
+{
+  "statusCode" : 400,
+  "message" : "에러 메세지",
+  "error" : "Bad Request"
+}
+```
+
+statusCode Message
+
+401 - 인증에 실패했습니다.
+
+403 - 접근 권한이 없습니다.
+
+404 - `${resource}를(을) 찾을 수 없습니다.`
+
+500 - 예상치 못한 에러가 발생했습니다. 관리자에게 문의해 주세요.

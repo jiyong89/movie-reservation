@@ -7,7 +7,7 @@ export class BookService {
   create(createBookDto: CreateBookDto) {
     return 'This action adds a new book';
   }
-
+  
   findAll() {
     return `This action returns all book`;
   }
